@@ -30,7 +30,12 @@ export const GlobalStyle = createGlobalStyle`
 
   h1, h2, h3, h4, h5, h6, strong {
     font-weight: bold;
+    line-height: 130%;
 	}
+
+  p, span {
+    line-height: 130%;
+  }
 
   button {
     cursor: pointer;
