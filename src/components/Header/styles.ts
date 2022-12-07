@@ -29,8 +29,8 @@ const BaseButton = styled.button`
   border-radius: 6px;
 
   svg {
-    width: 22px;
-    height: 22px;
+    width: 1.375rem;
+    height: 1.375rem;
   }
 `
 
