@@ -6,7 +6,7 @@ export const GlobalStyle = createGlobalStyle`
     border: 0;
     box-sizing: border-box
   }
-  
+
   :focus {
     outline: 0;
     box-shadow: 0 0 0 2px ${(props) => props.theme['yellow-dark']}
@@ -22,5 +22,22 @@ export const GlobalStyle = createGlobalStyle`
     font-family: 'Roboto', sans-serif;
     font-weight: 400;
     font-size: 1rem;
+
+    font-weight: 400;
+    font-size: 0.8rem;
+    line-height: 130%;
+  }
+
+  h1, h2, h3, h4, h5, h6, strong {
+    font-weight: bold;
+	}
+
+  button {
+    cursor: pointer;
+  }
+
+  [disabled] {
+    opacity: 0.6;
+    cursor: not-allowed;
   }
 `
