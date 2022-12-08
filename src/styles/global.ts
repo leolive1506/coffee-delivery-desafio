@@ -29,7 +29,8 @@ export const GlobalStyle = createGlobalStyle`
   }
 
   h1, h2, h3, h4, h5, h6, strong {
-    font-weight: bold;
+    font-family: 'Baloo 2';
+    font-weight: 800;
     line-height: 130%;
 	}
 
