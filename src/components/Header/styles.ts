@@ -15,7 +15,7 @@ export const ButtonsContainer = styled.div`
   align-items: center;
 `
 
-const BaseButton = styled.button`
+export const LocationButton = styled.button`
   display: flex;
   justify-content: center;
   align-items: center;
@@ -30,13 +30,26 @@ const BaseButton = styled.button`
     width: 1.375rem;
     height: 1.375rem;
   }
-`
-
-export const LocationButton = styled(BaseButton)`
   background: ${(props) => props.theme['purple-light']};
   color: ${(props) => props.theme.purple};
 `
-export const CartButton = styled(BaseButton)`
-  background: ${(props) => props.theme['yellow-light']};
-  color: ${(props) => props.theme.yellow};
+export const CartButton = styled.div`
+  a {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    gap: 0.25rem;
+
+    border: 0;
+    padding: 0.5rem;
+
+    border-radius: 6px;
+    background: ${(props) => props.theme['yellow-light']};
+    color: ${(props) => props.theme.yellow};
+
+    svg {
+      width: 1.375rem;
+      height: 1.375rem;
+    }
+  }
 `

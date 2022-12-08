@@ -6,18 +6,23 @@ import {
   LocationButton,
   CartButton,
 } from './styles'
+import { NavLink } from 'react-router-dom'
 
 export function Header() {
   return (
     <HeaderContainer>
-      <img src={Logo} alt="Logo" />
+      <NavLink to="/" title="Página inicial">
+        <img src={Logo} alt="Logo" />
+      </NavLink>
       <ButtonsContainer>
         <LocationButton>
           <MapPin weight="fill" />
           Porto Alegre, RS
         </LocationButton>
         <CartButton>
-          <ShoppingCart weight="fill" />
+          <NavLink to="/checkout" title="Pagamento">
+            <ShoppingCart weight="fill" />
+          </NavLink>
         </CartButton>
       </ButtonsContainer>
     </HeaderContainer>

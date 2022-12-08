@@ -1,3 +1,5 @@
+import { v4 as uuidv4 } from 'uuid'
+
 import { Card } from '../../components/Card'
 import { Intro } from './components/Intro'
 
@@ -8,7 +10,7 @@ import CoffeCubano from '../../assets/coffes/cubano.png'
 
 const cards = [
   {
-    id: String(new Date().getMilliseconds()),
+    id: uuidv4(),
     url: CoffeAmericano,
     badges: ['Tradicional'],
     title: 'Expresso tradicional',
@@ -16,7 +18,7 @@ const cards = [
     price: 0.99,
   },
   {
-    id: String(new Date().getMilliseconds()),
+    id: uuidv4(),
     url: CoffeArabe,
     badges: ['Especial'],
     title: 'Árabe',
@@ -24,7 +26,7 @@ const cards = [
     price: 0.99,
   },
   {
-    id: String(new Date().getMilliseconds()),
+    id: uuidv4(),
     url: CoffeCubano,
     badges: ['Especial', 'Gelado', 'Alcoólico'],
     title: 'Cubano',
