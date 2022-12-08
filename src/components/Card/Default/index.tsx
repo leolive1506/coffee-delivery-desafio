@@ -1,5 +1,6 @@
-import { Minus, Plus, ShoppingCart } from 'phosphor-react'
+import { ShoppingCart } from 'phosphor-react'
 import { useState } from 'react'
+import { ButtonsAmount } from '../../ButtonsAmount'
 import {
   ActionsContainer,
   Badge,
@@ -8,7 +9,6 @@ import {
   ContainerBadges,
   ContainerImg,
   PriceAndActionsContainer,
-  QuantityButtonsContainer,
 } from './styles'
 
 interface ICard {
@@ -57,15 +57,11 @@ export function Card({ card }: CardProps) {
         </span>
 
         <ActionsContainer>
-          <QuantityButtonsContainer>
-            <button type="button" onClick={handleDecrementAmountCoffe}>
-              <Minus />
-            </button>
-            <span>{amountCoffe}</span>
-            <button type="button" onClick={handleIncrementAmountCoffe}>
-              <Plus />
-            </button>
-          </QuantityButtonsContainer>
+          <ButtonsAmount
+            onDecrement={handleDecrementAmountCoffe}
+            onIncrement={handleIncrementAmountCoffe}
+            amount={amountCoffe}
+          />
           <CartButton>
             <ShoppingCart weight="fill" />
           </CartButton>

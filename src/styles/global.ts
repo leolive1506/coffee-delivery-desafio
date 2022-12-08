@@ -34,7 +34,7 @@ export const GlobalStyle = createGlobalStyle`
     line-height: 130%;
 	}
 
-  p, span {
+  p, span, dt, dd {
     line-height: 130%;
   }
 

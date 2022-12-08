@@ -1,6 +1,6 @@
 import { v4 as uuidv4 } from 'uuid'
 
-import { Card } from '../../components/Card'
+import { Card } from '../../components/Card/Default'
 import { Intro } from './components/Intro'
 
 import { CoffeListContainer, ContainerCards } from './styles'

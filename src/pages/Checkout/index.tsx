@@ -5,6 +5,7 @@ import {
   MapPinLine,
   Money,
 } from 'phosphor-react'
+import { CheckoutCard } from '../../components/Card/CheckoutCard'
 import { SelectButton } from '../../components/SelectButton'
 import {
   IntroContentContainer,
@@ -14,6 +15,14 @@ import {
   InputsContainer,
   Input,
   SelectButtonsContainer,
+  ContentCoffes,
+  DescriptionListItem,
+  DescriptionListContainer,
+  Dt,
+  Dd,
+  DtBold,
+  DdBold,
+  FinalizeButton,
 } from './styles'
 
 export function Checkout() {
@@ -65,7 +74,26 @@ export function Checkout() {
       </GridCol>
       <GridCol>
         <h2>Cafés selecionados</h2>
-        <Content>Resto conteúdo</Content>
+        <ContentCoffes>
+          <CheckoutCard />
+          <CheckoutCard />
+          <DescriptionListContainer>
+            <DescriptionListItem>
+              <Dt>Total de itens</Dt>
+              <Dd>R$ 29,70</Dd>
+            </DescriptionListItem>
+            <DescriptionListItem>
+              <Dt>Entrega</Dt>
+              <Dd>R$ 3,50</Dd>
+            </DescriptionListItem>
+            <DescriptionListItem>
+              <DtBold>Total</DtBold>
+              <DdBold>R$ 33,20</DdBold>
+            </DescriptionListItem>
+          </DescriptionListContainer>
+
+          <FinalizeButton>Confirmar pedido</FinalizeButton>
+        </ContentCoffes>
       </GridCol>
     </GridContainer>
   )
