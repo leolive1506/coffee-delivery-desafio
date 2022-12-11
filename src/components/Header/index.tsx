@@ -13,6 +13,7 @@ import { CoffeesContext } from '../../context/CoffeesContext'
 
 export function Header() {
   const { coffeesSelected } = useContext(CoffeesContext)
+
   return (
     <HeaderContainer>
       <NavLink to="/" title="Página inicial">

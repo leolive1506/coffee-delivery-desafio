@@ -22,6 +22,7 @@ interface CoffesContextType {
   coffeesSelected: CoffeeSelected[]
   incrementAmountCoffee: (id: string) => void
   decrementAmountCoffe: (id: string) => void
+  setAmountCoffee: (id: string, amount: number) => void
 }
 
 export const CoffeesContext = createContext({} as CoffesContextType)
@@ -62,6 +63,7 @@ export function CoffeesContextProvider({
   children,
 }: CoffeesContextProviderProps) {
   const [coffeesSelected, setCoffeesSelected] = useState<CoffeeSelected[]>([])
+  console.log(coffeesSelected)
 
   function incrementAmountCoffee(id: string) {
     const coffeeIndex = coffeesSelected.findIndex((coffee) => coffee.id === id)
@@ -95,9 +97,32 @@ export function CoffeesContextProvider({
     }
   }
 
+  function setAmountCoffee(id: string, amount: number) {
+    const coffeeIndex = coffeesSelected.findIndex((coffee) => coffee.id === id)
+
+    if (coffeeIndex < 0) {
+      const coffeeFilter = coffees.find((coffe) => coffe.id === id)
+      if (coffeeFilter) {
+        const newCoffeeSeleted = { amount, ...coffeeFilter }
+        setCoffeesSelected((state) => [...state, newCoffeeSeleted])
+      }
+    } else {
+      const newArrayCoffeesSeleted = produce(coffeesSelected, (draft) => {
+        draft[coffeeIndex].amount = amount
+      })
+
+      setCoffeesSelected(newArrayCoffeesSeleted)
+    }
+  }
+
   return (
     <CoffeesContext.Provider
-      value={{ coffeesSelected, incrementAmountCoffee, decrementAmountCoffe }}
+      value={{
+        coffeesSelected,
+        incrementAmountCoffee,
+        decrementAmountCoffe,
+        setAmountCoffee,
+      }}
     >
       {children}
     </CoffeesContext.Provider>

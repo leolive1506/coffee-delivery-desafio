@@ -1,5 +1,5 @@
 import { ShoppingCart } from 'phosphor-react'
-import { useContext } from 'react'
+import { useContext, useState } from 'react'
 import { CoffeesContext } from '../../../context/CoffeesContext'
 import { ButtonsAmount } from '../../ButtonsAmount'
 import {
@@ -26,19 +26,32 @@ interface CardProps {
 }
 export function Card({ card }: CardProps) {
   const { id, url, badges, title, description, price } = card
-  const { coffeesSelected, incrementAmountCoffee, decrementAmountCoffe } =
-    useContext(CoffeesContext)
+  const { coffeesSelected, setAmountCoffee } = useContext(CoffeesContext)
 
   const currentCoffeSelected = coffeesSelected.find(
     (coffee) => coffee.id === id,
   )
 
+  const currentAmountCoffeeSeleted = currentCoffeSelected
+    ? currentCoffeSelected.amount
+    : 0
+
+  const [amountCoffeeSeleted, setAmountCoffeeSeleted] = useState(
+    currentAmountCoffeeSeleted,
+  )
+
   function handleIncrementAmountCoffe(id: string) {
-    incrementAmountCoffee(id)
+    setAmountCoffeeSeleted((state) => state + 1)
   }
 
   function handleDecrementAmountCoffe(id: string) {
-    decrementAmountCoffe(id)
+    if (amountCoffeeSeleted > 0) {
+      setAmountCoffeeSeleted((state) => state - 1)
+    }
+  }
+
+  function handleAddCoffeeToCart(id: string) {
+    setAmountCoffee(id, amountCoffeeSeleted)
   }
 
   return (
@@ -64,9 +77,9 @@ export function Card({ card }: CardProps) {
           <ButtonsAmount
             onIncrement={() => handleIncrementAmountCoffe(id)}
             onDecrement={() => handleDecrementAmountCoffe(id)}
-            amount={currentCoffeSelected ? currentCoffeSelected.amount : 0}
+            amount={amountCoffeeSeleted}
           />
-          <CartButton>
+          <CartButton onClick={() => handleAddCoffeeToCart(id)}>
             <ShoppingCart weight="fill" />
           </CartButton>
         </ActionsContainer>
