@@ -23,6 +23,7 @@ interface CoffesContextType {
   incrementAmountCoffee: (id: string) => void
   decrementAmountCoffe: (id: string) => void
   setAmountCoffee: (id: string, amount: number) => void
+  removeCoffeeSelected: (id: string) => void
 }
 
 export const CoffeesContext = createContext({} as CoffesContextType)
@@ -74,11 +75,11 @@ export function CoffeesContextProvider({
         setCoffeesSelected((state) => [...state, newCoffeeSeleted])
       }
     } else {
-      const newArrayCoffeesSeleted = produce(coffeesSelected, (draft) => {
+      const newArrayCoffeesSelected = produce(coffeesSelected, (draft) => {
         draft[coffeeIndex].amount++
       })
 
-      setCoffeesSelected(newArrayCoffeesSeleted)
+      setCoffeesSelected(newArrayCoffeesSelected)
     }
   }
 
@@ -86,13 +87,13 @@ export function CoffeesContextProvider({
     const coffeeIndex = coffeesSelected.findIndex((coffee) => coffee.id === id)
 
     if (coffeeIndex >= 0) {
-      const newArrayCoffeesSeleted = produce(coffeesSelected, (draft) => {
+      const newArrayCoffeesSelected = produce(coffeesSelected, (draft) => {
         if (draft[coffeeIndex].amount > 0) {
           draft[coffeeIndex].amount--
         }
       }).filter((coffee) => coffee.amount !== 0)
 
-      setCoffeesSelected(newArrayCoffeesSeleted)
+      setCoffeesSelected(newArrayCoffeesSelected)
     }
   }
 
@@ -106,12 +107,20 @@ export function CoffeesContextProvider({
         setCoffeesSelected((state) => [...state, newCoffeeSeleted])
       }
     } else {
-      const newArrayCoffeesSeleted = produce(coffeesSelected, (draft) => {
+      const newArrayCoffeesSelected = produce(coffeesSelected, (draft) => {
         draft[coffeeIndex].amount = amount
       })
 
-      setCoffeesSelected(newArrayCoffeesSeleted)
+      setCoffeesSelected(newArrayCoffeesSelected)
     }
+  }
+
+  function removeCoffeeSelected(id: string) {
+    const newArrayCoffeesSelected = coffeesSelected.filter(
+      (coffee) => coffee.id !== id,
+    )
+
+    setCoffeesSelected(newArrayCoffeesSelected)
   }
 
   return (
@@ -121,6 +130,7 @@ export function CoffeesContextProvider({
         incrementAmountCoffee,
         decrementAmountCoffe,
         setAmountCoffee,
+        removeCoffeeSelected,
       }}
     >
       {children}

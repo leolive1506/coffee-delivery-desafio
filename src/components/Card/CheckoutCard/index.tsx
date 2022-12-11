@@ -25,8 +25,12 @@ interface CheckoutCardProps {
 
 export function CheckoutCard({ card }: CheckoutCardProps) {
   const { id, url, title, price } = card
-  const { incrementAmountCoffee, decrementAmountCoffe, coffeesSelected } =
-    useContext(CoffeesContext)
+  const {
+    incrementAmountCoffee,
+    decrementAmountCoffe,
+    coffeesSelected,
+    removeCoffeeSelected,
+  } = useContext(CoffeesContext)
 
   const currentCoffeSelected = coffeesSelected.find(
     (coffee) => coffee.id === id,
@@ -43,6 +47,10 @@ export function CheckoutCard({ card }: CheckoutCardProps) {
     decrementAmountCoffe(id)
   }
 
+  function handleDeleteCoffeeSeleted(id: string) {
+    removeCoffeeSelected(id)
+  }
+
   return (
     <CheckoutCardContainer>
       <div>
@@ -55,7 +63,7 @@ export function CheckoutCard({ card }: CheckoutCardProps) {
               onDecrement={() => handleDecrementAmountCoffe(id)}
               amount={currentAmountCoffeeSeleted}
             />
-            <RemoveButton>
+            <RemoveButton onClick={() => handleDeleteCoffeeSeleted(id)}>
               <Trash />
               Remover
             </RemoveButton>
