@@ -5,10 +5,14 @@ import {
   ButtonsContainer,
   LocationButton,
   CartButton,
+  CountShoppingCart,
 } from './styles'
 import { NavLink } from 'react-router-dom'
+import { useContext } from 'react'
+import { CoffeesContext } from '../../context/CoffeesContext'
 
 export function Header() {
+  const { coffeesSelected } = useContext(CoffeesContext)
   return (
     <HeaderContainer>
       <NavLink to="/" title="Página inicial">
@@ -22,6 +26,9 @@ export function Header() {
         <CartButton>
           <NavLink to="/checkout" title="Pagamento">
             <ShoppingCart weight="fill" />
+            {coffeesSelected.length > 0 && (
+              <CountShoppingCart>{coffeesSelected.length}</CountShoppingCart>
+            )}
           </NavLink>
         </CartButton>
       </ButtonsContainer>

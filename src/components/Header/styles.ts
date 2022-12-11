@@ -35,6 +35,7 @@ export const LocationButton = styled.button`
 `
 export const CartButton = styled.div`
   a {
+    position: relative;
     display: flex;
     justify-content: center;
     align-items: center;
@@ -52,4 +53,27 @@ export const CartButton = styled.div`
       height: 1.375rem;
     }
   }
+`
+
+export const CountShoppingCart = styled.span`
+  display: flex;
+  justify-content: center;
+  align-items: center;
+
+  position: absolute;
+  width: 1.25rem;
+  height: 1.25rem;
+  right: -0.521875rem;
+  top: -0.5rem;
+
+  background: ${(props) => props.theme['yellow-dark']};
+  border-radius: 1000px;
+
+  font-weight: bold;
+  font-size: 0.75rem;
+  /* identical to box height, or 16px */
+  text-align: center;
+
+  /* Base/White */
+  color: ${(props) => props.theme.white};
 `

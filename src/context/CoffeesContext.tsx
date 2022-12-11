@@ -1,4 +1,5 @@
 import { createContext, ReactNode, useState } from 'react'
+import produce from 'immer'
 import { v4 as uuidv4 } from 'uuid'
 import CoffeAmericano from '../assets/coffes/americano.png'
 import CoffeArabe from '../assets/coffes/arabe.png'
@@ -63,44 +64,34 @@ export function CoffeesContextProvider({
   const [coffeesSelected, setCoffeesSelected] = useState<CoffeeSelected[]>([])
 
   function incrementAmountCoffee(id: string) {
-    const coffeeIncrementIndex = coffeesSelected.findIndex(
-      (coffee) => coffee.id === id,
-    )
+    const coffeeIndex = coffeesSelected.findIndex((coffee) => coffee.id === id)
 
-    if (coffeeIncrementIndex < 0) {
+    if (coffeeIndex < 0) {
       const coffeeFilter = coffees.find((coffe) => coffe.id === id)
       if (coffeeFilter) {
         const newCoffeeSeleted = { amount: 1, ...coffeeFilter }
         setCoffeesSelected((state) => [...state, newCoffeeSeleted])
       }
     } else {
-      const newCoffeeSeleted = coffeesSelected.map((coffee) => {
-        if (coffee.id === id) {
-          coffee.amount++
-        }
-
-        return coffee
+      const newArrayCoffeesSeleted = produce(coffeesSelected, (draft) => {
+        draft[coffeeIndex].amount++
       })
 
-      setCoffeesSelected(newCoffeeSeleted)
+      setCoffeesSelected(newArrayCoffeesSeleted)
     }
   }
 
   function decrementAmountCoffe(id: string) {
-    const coffeeIncrementIndex = coffeesSelected.findIndex(
-      (coffee) => coffee.id === id,
-    )
+    const coffeeIndex = coffeesSelected.findIndex((coffee) => coffee.id === id)
 
-    if (coffeeIncrementIndex >= 0) {
-      const newCoffeeSeleted = coffeesSelected.map((coffee) => {
-        if (coffee.id === id && coffee.amount > 0) {
-          coffee.amount--
+    if (coffeeIndex >= 0) {
+      const newArrayCoffeesSeleted = produce(coffeesSelected, (draft) => {
+        if (draft[coffeeIndex].amount > 0) {
+          draft[coffeeIndex].amount--
         }
+      }).filter((coffee) => coffee.amount !== 0)
 
-        return coffee
-      })
-
-      setCoffeesSelected(newCoffeeSeleted)
+      setCoffeesSelected(newArrayCoffeesSeleted)
     }
   }
 
