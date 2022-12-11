@@ -7,6 +7,8 @@ import {
 } from 'phosphor-react'
 import { CheckoutCard } from '../../components/Card/CheckoutCard'
 import { SelectButton } from '../../components/SelectButton'
+import { coffees } from '../../context/CoffeesContext'
+
 import {
   IntroContentContainer,
   GridCol,
@@ -75,8 +77,9 @@ export function Checkout() {
       <GridCol>
         <h2>Cafés selecionados</h2>
         <ContentCoffes>
-          <CheckoutCard />
-          <CheckoutCard />
+          {coffees.map((card) => (
+            <CheckoutCard key={card.id} card={card} />
+          ))}
           <DescriptionListContainer>
             <DescriptionListItem>
               <Dt>Total de itens</Dt>

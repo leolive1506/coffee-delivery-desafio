@@ -1,5 +1,4 @@
 import { Trash } from 'phosphor-react'
-import CoffeAmericano from '../../../assets/coffes/americano.png'
 import { ButtonsAmount } from '../../ButtonsAmount'
 import {
   CheckoutCardContainer,
@@ -8,13 +7,28 @@ import {
   RemoveButton,
 } from './styles'
 
-export function CheckoutCard() {
+interface ICard {
+  id: string
+  url: string
+  badges: Array<string>
+  title: string
+  description: string
+  price: number
+}
+
+interface CheckoutCardProps {
+  card: ICard
+}
+
+export function CheckoutCard({ card }: CheckoutCardProps) {
+  const { url, title, price } = card
+
   return (
     <CheckoutCardContainer>
       <div>
-        <img src={CoffeAmericano} alt="Café americano" />
+        <img src={url} alt={`Foto ${title}`} />
         <Content>
-          <h3>Expresso tradicional</h3>
+          <h3>{title}</h3>
           <div>
             <ButtonsAmount
               onDecrement={() => console.log('decrement')}
@@ -29,7 +43,12 @@ export function CheckoutCard() {
         </Content>
       </div>
       <PriceContainer>
-        <strong>R$ 9,90</strong>
+        <strong>
+          {new Intl.NumberFormat('pt-br', {
+            style: 'currency',
+            currency: 'BRL',
+          }).format(price * 10)}
+        </strong>
       </PriceContainer>
     </CheckoutCardContainer>
   )

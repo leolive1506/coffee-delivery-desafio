@@ -44,11 +44,16 @@ export const RemoveButton = styled.button`
   font-size: 0.75rem;
   color: ${(props) => props.theme['base-text']};
   background: ${(props) => props.theme['base-button']};
+  transition: backgroud-color 1s ease-out;
 
   svg {
     width: 1rem;
     height: 1rem;
     color: ${(props) => props.theme.purple};
+  }
+
+  :hover {
+    background: ${(props) => props.theme['base-hover']};
   }
 `
 
