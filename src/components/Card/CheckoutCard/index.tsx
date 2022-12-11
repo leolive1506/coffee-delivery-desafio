@@ -1,4 +1,7 @@
 import { Trash } from 'phosphor-react'
+import { useContext } from 'react'
+import { CoffeesContext } from '../../../context/CoffeesContext'
+import { formatCurrency } from '../../../helpers'
 import { ButtonsAmount } from '../../ButtonsAmount'
 import {
   CheckoutCardContainer,
@@ -21,7 +24,24 @@ interface CheckoutCardProps {
 }
 
 export function CheckoutCard({ card }: CheckoutCardProps) {
-  const { url, title, price } = card
+  const { id, url, title, price } = card
+  const { incrementAmountCoffee, decrementAmountCoffe, coffeesSelected } =
+    useContext(CoffeesContext)
+
+  const currentCoffeSelected = coffeesSelected.find(
+    (coffee) => coffee.id === id,
+  )
+  const currentAmountCoffeeSeleted = currentCoffeSelected
+    ? currentCoffeSelected.amount
+    : 0
+
+  function handleIncrementAmountCoffe(id: string) {
+    incrementAmountCoffee(id)
+  }
+
+  function handleDecrementAmountCoffe(id: string) {
+    decrementAmountCoffe(id)
+  }
 
   return (
     <CheckoutCardContainer>
@@ -31,9 +51,9 @@ export function CheckoutCard({ card }: CheckoutCardProps) {
           <h3>{title}</h3>
           <div>
             <ButtonsAmount
-              onDecrement={() => console.log('decrement')}
-              onIncrement={() => console.log('increment')}
-              amount={1}
+              onIncrement={() => handleIncrementAmountCoffe(id)}
+              onDecrement={() => handleDecrementAmountCoffe(id)}
+              amount={currentAmountCoffeeSeleted}
             />
             <RemoveButton>
               <Trash />
@@ -43,12 +63,7 @@ export function CheckoutCard({ card }: CheckoutCardProps) {
         </Content>
       </div>
       <PriceContainer>
-        <strong>
-          {new Intl.NumberFormat('pt-br', {
-            style: 'currency',
-            currency: 'BRL',
-          }).format(price * 10)}
-        </strong>
+        <strong>{formatCurrency(price)}</strong>
       </PriceContainer>
     </CheckoutCardContainer>
   )

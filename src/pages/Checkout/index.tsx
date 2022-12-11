@@ -5,9 +5,11 @@ import {
   MapPinLine,
   Money,
 } from 'phosphor-react'
+import { useContext } from 'react'
 import { CheckoutCard } from '../../components/Card/CheckoutCard'
 import { SelectButton } from '../../components/SelectButton'
-import { coffees } from '../../context/CoffeesContext'
+import { CoffeesContext } from '../../context/CoffeesContext'
+import { formatCurrency } from '../../helpers'
 
 import {
   IntroContentContainer,
@@ -28,6 +30,14 @@ import {
 } from './styles'
 
 export function Checkout() {
+  const { coffeesSelected } = useContext(CoffeesContext)
+  const totalAmountCoffees = coffeesSelected.reduce((acc, coffee) => {
+    acc += coffee.price * coffee.amount
+    return acc
+  }, 0)
+
+  const deliveryFee = 0.35
+
   return (
     <GridContainer>
       <GridCol>
@@ -77,21 +87,23 @@ export function Checkout() {
       <GridCol>
         <h2>Cafés selecionados</h2>
         <ContentCoffes>
-          {coffees.map((card) => (
+          {coffeesSelected.map((card) => (
             <CheckoutCard key={card.id} card={card} />
           ))}
           <DescriptionListContainer>
             <DescriptionListItem>
               <Dt>Total de itens</Dt>
-              <Dd>R$ 29,70</Dd>
+              <Dd>{formatCurrency(totalAmountCoffees)}</Dd>
             </DescriptionListItem>
             <DescriptionListItem>
               <Dt>Entrega</Dt>
-              <Dd>R$ 3,50</Dd>
+              <Dd>{formatCurrency(deliveryFee)}</Dd>
             </DescriptionListItem>
             <DescriptionListItem>
               <DtBold>Total</DtBold>
-              <DdBold>R$ 33,20</DdBold>
+              <DdBold>
+                {formatCurrency(totalAmountCoffees + deliveryFee)}
+              </DdBold>
             </DescriptionListItem>
           </DescriptionListContainer>
 

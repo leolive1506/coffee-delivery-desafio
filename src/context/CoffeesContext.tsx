@@ -63,7 +63,6 @@ export function CoffeesContextProvider({
   children,
 }: CoffeesContextProviderProps) {
   const [coffeesSelected, setCoffeesSelected] = useState<CoffeeSelected[]>([])
-  console.log(coffeesSelected)
 
   function incrementAmountCoffee(id: string) {
     const coffeeIndex = coffeesSelected.findIndex((coffee) => coffee.id === id)
