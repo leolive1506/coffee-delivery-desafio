@@ -12,7 +12,7 @@ export interface UserAddress {
 
 interface PaymentContextType {
   userAddress: UserAddress
-  paymentMethod: string
+  paymentMethod: 'credit-card' | 'debit-card' | 'money'
   changeUserAddress: (userAddress: UserAddress) => void
   changePaymentMethod: (
     paymentMethod: 'credit-card' | 'debit-card' | 'money',

@@ -1,5 +1,4 @@
 import styled from 'styled-components'
-import { defaultTheme } from '../../../../styles/themes/default'
 
 export const IntroContainer = styled.div`
   display: grid;
@@ -47,33 +46,10 @@ export const CompanyFeatureContainer = styled.div`
   }
 `
 
-interface CompanyFeatureProps {
-  backgroundIcon: keyof typeof defaultTheme
-}
-
-export const CompanyFeature = styled.div<CompanyFeatureProps>`
+export const CompanyFeature = styled.div`
   display: flex;
   align-items: center;
   gap: 0.75rem;
-
-  > div {
-    background: ${(props) => props.theme[props.backgroundIcon]};
-    color: ${(props) => props.theme.background};
-
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    padding: 0.5rem;
-
-    width: 2rem;
-    height: 2rem;
-    border-radius: 50%;
-
-    svg {
-      width: 1rem;
-      height: 1rem;
-    }
-  }
 
   > span {
     /* width: 187px;

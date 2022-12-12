@@ -1,4 +1,5 @@
 import { useContext, useEffect, useState } from 'react'
+import { useNavigate } from 'react-router-dom'
 import { useForm, FormProvider } from 'react-hook-form'
 import { CheckoutCard } from '../../components/Card/CheckoutCard'
 import { CoffeesContext } from '../../context/CoffeesContext'
@@ -40,9 +41,12 @@ export function Checkout() {
     userAddress,
     paymentMethod: contextPaymentMethod,
   } = useContext(PaymentContext)
+
   const [paymentMethod, setPaymentMethod] = useState<
     'credit-card' | 'debit-card' | 'money'
   >(contextPaymentMethod)
+
+  const navigate = useNavigate()
 
   const finishOrderForm = useForm({
     resolver: zodResolver(finishOrderValidationSchema),
@@ -64,7 +68,7 @@ export function Checkout() {
   function handleFisishOrder(data: UserAddress) {
     changeUserAddress(data)
     changePaymentMethod(paymentMethod)
-    toast.success('salvo com sucesso')
+    return navigate('/finished-order')
   }
 
   function changeStatePaymentMethod(

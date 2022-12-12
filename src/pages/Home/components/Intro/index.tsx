@@ -1,5 +1,6 @@
 import { Coffee, Package, ShoppingCart, Timer } from 'phosphor-react'
 import CoffeDelivery from '../../../../assets/coffe-delivery-intro.png'
+import { IconRounded } from '../../../../components/IconRounded'
 import {
   IntroContainer,
   CoffeDeliveryContainer,
@@ -21,28 +22,32 @@ export function Intro() {
         </TitlesContainer>
 
         <CompanyFeatureContainer>
-          <CompanyFeature backgroundIcon="yellow-dark">
-            <div>
-              <ShoppingCart weight="fill" />
-            </div>
+          <CompanyFeature>
+            <IconRounded
+              icon={<ShoppingCart weight="fill" />}
+              backgroundIcon="yellow-dark"
+            />
             <span>Compra simples e segura</span>
           </CompanyFeature>
-          <CompanyFeature backgroundIcon="base-text">
-            <div>
-              <Package weight="fill" />
-            </div>
+          <CompanyFeature>
+            <IconRounded
+              icon={<Package weight="fill" />}
+              backgroundIcon="base-text"
+            />
             <span>Embalagem mantém o café intacto</span>
           </CompanyFeature>
-          <CompanyFeature backgroundIcon="yellow">
-            <div>
-              <Timer weight="fill" />
-            </div>
+          <CompanyFeature>
+            <IconRounded
+              icon={<Timer weight="fill" />}
+              backgroundIcon="yellow"
+            />
             <span>Entrega rápida e rastreada</span>
           </CompanyFeature>
-          <CompanyFeature backgroundIcon="purple">
-            <div>
-              <Coffee weight="fill" />
-            </div>
+          <CompanyFeature>
+            <IconRounded
+              icon={<Coffee weight="fill" />}
+              backgroundIcon="purple"
+            />
             <span>O café chega fresquinho até você</span>
           </CompanyFeature>
         </CompanyFeatureContainer>
