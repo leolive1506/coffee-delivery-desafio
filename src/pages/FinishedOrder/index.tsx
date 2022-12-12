@@ -1,3 +1,7 @@
+import { Clock, CurrencyDollar, MapPin } from 'phosphor-react'
+import { useContext } from 'react'
+import { IconRounded } from '../../components/IconRounded'
+import { PaymentContext } from '../../context/PaymentContext'
 import { DeliveryIllustration } from './components/DeliveryIllustration'
 import {
   GridContainer,
@@ -8,6 +12,14 @@ import {
 } from './styles'
 
 export function FinishedOrder() {
+  const { userAddress, paymentMethod } = useContext(PaymentContext)
+
+  const PAYMENT_METHOD = {
+    'credit-card': 'Cartão de crédito',
+    'debit-card': 'Cartão de débito',
+    money: 'dinheiro',
+  }
+
   return (
     <div>
       <IntroContainer>
@@ -18,18 +30,31 @@ export function FinishedOrder() {
         <Gradient>
           <ListContainer>
             <ListItem>
-              <p>
-                Entrega em <strong>Rua João Daniel Martinelli, 102</strong>
-              </p>
-              <p>Farrapos - Porto Alegre, RS</p>
+              <IconRounded backgroundIcon="purple" icon={<MapPin />} />
+              <div>
+                <p>
+                  Entrega em{' '}
+                  <strong>{`${userAddress.road}, ${userAddress.number}`}</strong>
+                </p>
+                <p>Farrapos - Porto Alegre, RS</p>
+              </div>
             </ListItem>
             <ListItem>
-              <p>Previsão de entrega</p>
-              <strong>20 min - 30 min</strong>
+              <IconRounded backgroundIcon="yellow" icon={<Clock />} />
+              <div>
+                <p>Previsão de entrega</p>
+                <strong>20 min - 30 min</strong>
+              </div>
             </ListItem>
             <ListItem>
-              <p>Pagamento na entrega</p>
-              <strong>Cartão de Crédito</strong>
+              <IconRounded
+                backgroundIcon="yellow-dark"
+                icon={<CurrencyDollar />}
+              />
+              <div>
+                <p>Pagamento na entrega</p>
+                <strong>{PAYMENT_METHOD[paymentMethod]}</strong>
+              </div>
             </ListItem>
           </ListContainer>
         </Gradient>

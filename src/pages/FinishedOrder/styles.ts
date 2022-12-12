@@ -18,13 +18,15 @@ export const GridContainer = styled.div`
   margin-top: 2.5rem;
   display: grid;
   grid-template-columns: 1fr 1fr;
+  gap: 7rem;
+  align-items: center;
 `
 
 export const Gradient = styled.div`
-  position: relative;
   border-radius: 6px 36px;
   background: linear-gradient(102.89deg, #dbac2c 2.61%, #8047f8 98.76%);
   padding: 1px;
+  /* justify-self: flex-end; */
 `
 export const ListContainer = styled.ul`
   height: 100%;
@@ -33,7 +35,6 @@ export const ListContainer = styled.ul`
   flex-direction: column;
   align-items: flex-start;
   gap: 2rem;
-  position: relative;
   border-radius: 6px 36px;
   background: ${(props) => props.theme.background};
 
@@ -45,4 +46,8 @@ export const ListContainer = styled.ul`
     font-weight: bold;
   }
 `
-export const ListItem = styled.li``
+export const ListItem = styled.li`
+  display: flex;
+  gap: 0.75rem;
+  align-items: center;
+`
