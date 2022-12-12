@@ -1,7 +1,7 @@
 import styled from 'styled-components'
 import { CheckoutCardContainer } from '../../components/Card/CheckoutCard/styles'
 
-export const GridContainer = styled.div`
+export const GridContainer = styled.form`
   display: grid;
   grid-template-columns: minmax(640px, auto) minmax(448px, auto);
   gap: 2rem;
