@@ -62,6 +62,7 @@ export function CheckoutCard({ card }: CheckoutCardProps) {
               onIncrement={() => handleIncrementAmountCoffe(id)}
               onDecrement={() => handleDecrementAmountCoffe(id)}
               amount={currentAmountCoffeeSeleted}
+              isDecrementDisabled={currentAmountCoffeeSeleted === 1}
             />
             <RemoveButton onClick={() => handleDeleteCoffeeSeleted(id)}>
               <Trash />

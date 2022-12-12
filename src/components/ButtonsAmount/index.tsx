@@ -5,16 +5,22 @@ interface ButtonsAmountProps {
   onDecrement: () => void
   onIncrement: () => void
   amount: number
+  isDecrementDisabled?: boolean
 }
 
 export function ButtonsAmount({
   onDecrement,
   onIncrement,
   amount,
+  isDecrementDisabled = false,
 }: ButtonsAmountProps) {
   return (
     <QuantityButtonsContainer>
-      <button type="button" onClick={onDecrement}>
+      <button
+        type="button"
+        onClick={onDecrement}
+        disabled={isDecrementDisabled}
+      >
         <Minus />
       </button>
       <span>{amount}</span>

@@ -51,7 +51,9 @@ export function Card({ card }: CardProps) {
   }
 
   function handleAddCoffeeToCart(id: string) {
-    setAmountCoffee(id, amountCoffeeSeleted)
+    if (amountCoffeeSeleted > 0) {
+      setAmountCoffee(id, amountCoffeeSeleted)
+    }
   }
 
   return (
