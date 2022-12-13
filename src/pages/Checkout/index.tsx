@@ -66,8 +66,13 @@ export function Checkout() {
   const deliveryFee = 0.35
 
   function handleFisishOrder(data: UserAddress) {
+    if (coffeesSelected.length < 1) {
+      return toast.error('Selecione pelo menos um café')
+    }
+
     changeUserAddress(data)
     changePaymentMethod(paymentMethod)
+
     return navigate('/finished-order')
   }
 
