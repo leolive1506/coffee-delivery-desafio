@@ -1,4 +1,4 @@
-import { createContext, ReactNode, useState } from 'react'
+import { createContext, ReactNode, useEffect, useState } from 'react'
 import produce from 'immer'
 import { v4 as uuidv4 } from 'uuid'
 import CoffeAmericano from '../assets/coffes/americano.png'
@@ -63,7 +63,19 @@ interface CoffeesContextProviderProps {
 export function CoffeesContextProvider({
   children,
 }: CoffeesContextProviderProps) {
-  const [coffeesSelected, setCoffeesSelected] = useState<CoffeeSelected[]>([])
+  const coffeeSeletectedLocalStorage = localStorage.getItem(
+    '@coffee-delivery-desafio:coffess-selected',
+  )
+  const [coffeesSelected, setCoffeesSelected] = useState<CoffeeSelected[]>(
+    coffeeSeletectedLocalStorage
+      ? JSON.parse(coffeeSeletectedLocalStorage)
+      : [],
+  )
+
+  useEffect(() => {
+    const stateJSON = JSON.stringify(coffeesSelected)
+    localStorage.setItem('@coffee-delivery-desafio:coffess-selected', stateJSON)
+  }, [coffeesSelected])
 
   function incrementAmountCoffee(id: string) {
     const coffeeIndex = coffeesSelected.findIndex((coffee) => coffee.id === id)

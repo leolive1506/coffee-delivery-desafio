@@ -1,4 +1,4 @@
-import { createContext, ReactNode, useState } from 'react'
+import { createContext, ReactNode, useEffect, useState } from 'react'
 
 export interface UserAddress {
   'zip-code': string
@@ -28,10 +28,36 @@ interface PaymentContextProviderProps {
 export function PaymentContextProvider({
   children,
 }: PaymentContextProviderProps) {
-  const [userAddress, setUserAddress] = useState({} as UserAddress)
+  const userAddressdLocalStorage = localStorage.getItem(
+    '@coffee-delivery-desafio:user-address',
+  )
+  const [userAddress, setUserAddress] = useState(
+    userAddressdLocalStorage
+      ? JSON.parse(userAddressdLocalStorage)
+      : ({} as UserAddress),
+  )
+
+  const paymentMethodLocalStorage = localStorage.getItem(
+    '@coffee-delivery-desafio:payment-method',
+  )
+
   const [paymentMethod, sePaymentMethod] = useState<
     'credit-card' | 'debit-card' | 'money'
-  >('credit-card')
+  >(
+    paymentMethodLocalStorage
+      ? JSON.parse(paymentMethodLocalStorage)
+      : 'credit-card',
+  )
+
+  useEffect(() => {
+    const stateJSON = JSON.stringify(userAddress)
+    localStorage.setItem('@coffee-delivery-desafio:user-address', stateJSON)
+  }, [userAddress])
+
+  useEffect(() => {
+    const stateJSON = JSON.stringify(paymentMethod)
+    localStorage.setItem('@coffee-delivery-desafio:payment-method', stateJSON)
+  }, [paymentMethod])
 
   function changeUserAddress(userAddress: UserAddress) {
     console.log(userAddress)
