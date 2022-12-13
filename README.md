@@ -10,3 +10,7 @@
 - Exibir o total de itens no carrinho no Header
 - Exibir o valor total da soma de itens no carrinho multiplicados pelo valor
 - Revisar conceitos e libs usadas (component, styled-components, react hook form, react router dom, zod, etc)
+
+
+https://user-images.githubusercontent.com/89431704/207220997-d27d9b75-bac1-4aea-b0e8-ad8ca210a618.mp4
+
